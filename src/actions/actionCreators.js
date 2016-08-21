@@ -1,7 +1,8 @@
 import query from 'query-string';
+import { v4 } from 'node-uuid'
 import * as actionTypes from './actionTypes';
 
-export function fetchCards(filters = { q: 'archangel' }) {
+export function fetchCards(filters = { q: 'archangel av' }) {
   return function (dispatch) {
     if (!filters.q || filters.q === '') return;
 
@@ -27,5 +28,15 @@ export const fetchCardsRejected = (error) => {
   return {
     type: actionTypes.FETCH_CARDS_REJECTED,
     error
+  }
+}
+
+export const addCard = (card) => {
+  const id = v4();
+
+  return {
+    type: actionTypes.ADD_CARD,
+    id,
+    card
   }
 }

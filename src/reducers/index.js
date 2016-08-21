@@ -3,11 +3,17 @@
  * method.
  **/
 import { combineReducers } from 'redux';
-import cards from './cardsReducer';
+import searchedCards from './searchedCardsReducer';
+import cardsById from './cardsByIdReducer';
+import decksById from './decksByIdReducer';
+import allIds from './identificationsReducer';
 
 /**
  * Replace courses for an actual reducer.
  **/
 export default combineReducers({
-  cards
+  searchedCards,
+  cardsById,
+  decksById,
+  allIds
 });

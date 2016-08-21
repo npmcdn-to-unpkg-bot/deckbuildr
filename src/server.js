@@ -7,7 +7,7 @@ import configureStore from './store/configureStore';
 import routes from './routes';
 import configureServer from '../tools/server/configureServer.js';
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3005;
 const app = express();
 
 app.use(configureServer());
@@ -24,7 +24,7 @@ app.get('*', (req, res) => {
     } else {
       // Set initialState here if needed.
       const initialState = {};
-      
+
       const store = configureStore(initialState);
       const react = (
         <Provider store={store}>
