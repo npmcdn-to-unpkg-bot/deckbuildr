@@ -47,3 +47,14 @@ app.listen(PORT, error => {
     console.log(`Listening at port ${PORT}`);
   }
 });
+
+function generateToken(user) {
+  const u = {
+   username: user.username,
+   _id: user._id.toString(),
+  };
+
+  return token = jwt.sign(u, JWT_SECRET, {
+     expiresIn: 60 * 60 * 24
+  });
+}

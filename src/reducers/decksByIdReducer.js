@@ -2,13 +2,12 @@ import * as actionTypes from '../actions/actionTypes';
 
 export default function decksById (state = {}, action) {
   switch (action.type) {
-    case actionTypes.ADD_DECK: {
-      const { deck } = state;
+    case actionTypes.CREATE_DECK: {
+      const { deck } = action;
       return {
         ...state,
-        [action.id]: {
-          deck,
-          liked: 0
+        [deck.id]: {
+          ...deck
         }
       };
     }
@@ -17,8 +16,10 @@ export default function decksById (state = {}, action) {
       delete newState[action.id];
       return newState;
     }
-    case actionTypes.LIKE_DECK: {
-      return state;
+    case actionTypes.TOGGLE_FAVORITE_DECK: {
+      const newState = { ...state }
+      newState[action.id].favorited = !newState[action.id].favorited;
+      return newState;
     }
     default: {
       return state;

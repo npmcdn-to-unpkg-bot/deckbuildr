@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Header from './Header';
 
 class App extends React.Component {
   constructor (props) {
@@ -7,9 +8,12 @@ class App extends React.Component {
 
   render() {
     return (
-      <main>
-        {this.props.children}
-      </main>
+      <section>
+        <Header />
+        <main className="container">
+          {this.props.children}
+        </main>
+      </section>
     );
   }
 };

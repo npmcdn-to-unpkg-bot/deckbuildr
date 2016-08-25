@@ -12,8 +12,11 @@
   "license": "MIT",
   "dependencies": {
     "babel-polyfill": "6.8.0",
+    "bcrypt": "^0.8.7",
     "compression": "1.6.1",
     "express": "4.13.4",
+    "jsonwebtoken": "^7.1.9",
+    "mongoose": "^4.5.9",
     "node-fetch": "^1.5.3",
     "node-uuid": "^1.4.7",
     "pug": "^2.0.0-alpha8",

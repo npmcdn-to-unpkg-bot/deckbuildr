@@ -4,16 +4,15 @@
  **/
 import { combineReducers } from 'redux';
 import searchedCards from './searchedCardsReducer';
-import cardsById from './cardsByIdReducer';
 import decksById from './decksByIdReducer';
 import allIds from './identificationsReducer';
-
+import activeDeck from './activeDeckReducer';
 /**
  * Replace courses for an actual reducer.
  **/
 export default combineReducers({
+  activeDeck,
   searchedCards,
-  cardsById,
   decksById,
   allIds
 });
