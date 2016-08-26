@@ -5,14 +5,20 @@
 import { combineReducers } from 'redux';
 import searchedCards from './searchedCardsReducer';
 import decksById from './decksByIdReducer';
-import allIds from './identificationsReducer';
+import deckIds from './deckIds';
 import activeDeck from './activeDeckReducer';
-/**
- * Replace courses for an actual reducer.
- **/
+import isFetching from './isFetchingReducer';
+import cardsById from './cardsById';
+import categoriesById from './categoriesById';
+import categoryIds from './categoryIds';
+
 export default combineReducers({
   activeDeck,
   searchedCards,
+  cardsById,
   decksById,
-  allIds
+  deckIds,
+  isFetching,
+  // categoriesById,
+  // categoryIds
 });

@@ -3,6 +3,7 @@ import { Link, IndexLink } from 'react-router';
 
 const Header = () => {
   return (
+    <header>
       <nav className="navbar navbar-default">
         <div className="container-fluid">
           <div className="navbar-header">
@@ -22,6 +23,7 @@ const Header = () => {
           </div>
         </div>
       </nav>
+    </header>
   )
 }
 

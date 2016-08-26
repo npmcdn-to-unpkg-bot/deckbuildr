@@ -3,7 +3,7 @@ import { Route, IndexRoute } from 'react-router';
 import App from './components/App';
 import Home from './components/Home';
 import DecksListContainer from './components/container/DecksListContainer';
-import CreateDeck from './components/CreateDeck';
+import CreateDeckForm from './components/other/CreateDeckForm';
 import DeckContainer from './components/container/DeckContainer';
 
 export default (
@@ -11,6 +11,6 @@ export default (
     <IndexRoute component={Home} />
     <Route path="/decks" component={DecksListContainer}/>
     <Route path="/decks/:id" component={DeckContainer}/>
-    <Route path="/create" component={CreateDeck}/>
+    <Route path="/create" component={CreateDeckForm}/>
   </Route>
 );

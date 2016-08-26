@@ -1,11 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createDeck } from '../actions/actionCreators';
+import { createDeck, createCategory } from '../../actions/actionCreators';
 import { Link } from 'react-router';
-class CreateDeck extends React.Component {
+import Select from 'react-select';
+
+class CreateDeckForm extends React.Component {
   constructor () {
     super();
     this.onSubmitCreateDeck = this.onSubmitCreateDeck.bind(this);
+    this.onAddCategory = this.onAddCategory.bind(this);
   }
 
   onSubmitCreateDeck (e) {
@@ -13,10 +16,13 @@ class CreateDeck extends React.Component {
     const { title, description } = this;
     const deck = {
       title: title.value,
-      description: description.value
+      description: description.value,
     };
 
     this.props.dispatch(createDeck(deck));
+  }
+
+  onAddCategory (value) {
   }
 
   render () {
@@ -52,4 +58,17 @@ class CreateDeck extends React.Component {
   }
 }
 
-export default connect()(CreateDeck);
+/*
+<Select
+          //   options={this.props.categories}
+          //   name="category"
+          //   multi={true}
+          //   ref={(ref) => { this.categories = ref; }}
+          // />
+*/
+
+const mapStateToProps = state => {
+  return {
+  }
+}
+export default connect(mapStateToProps)(CreateDeckForm);

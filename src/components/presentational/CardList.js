@@ -11,7 +11,7 @@ const CardsList = ({cards, activeDeck}) => {
         {...card}
       />
       <AddCardForm
-        {...card}
+        card={card}
       />
     </section>
   ));

@@ -6,9 +6,11 @@ import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
 import routes from './routes';
 import configureServer from '../tools/server/configureServer.js';
+import jwt from 'jsonwebtoken';
 
 const PORT = process.env.PORT || 3005;
 const app = express();
+const JWT_SECRET = "Jori";
 
 app.use(configureServer());
 
@@ -51,10 +53,43 @@ app.listen(PORT, error => {
 function generateToken(user) {
   const u = {
    username: user.username,
-   _id: user._id.toString(),
+   id: user.id.toString(),
   };
 
-  return token = jwt.sign(u, JWT_SECRET, {
+  return jwt.sign(u, JWT_SECRET, {
      expiresIn: 60 * 60 * 24
   });
 }
+
+// app.post('/signup', (req, res, next) => {
+//  const body = req.body;
+//  const hash = bcrypt.hashSync(body.password.trim(), 10);
+//  const user = new User({
+//   username: body.username.trim(),
+//   password: hash,
+//  });
+
+//  user.save((err, user) => {
+//     if (err) {
+//       throw err
+//     }
+
+//     const token = utils.generateToken(user);
+
+//     res.json({
+//        user,
+//        token
+//     });
+//  });
+// });
+
+app.post('/login', (req, res) => {
+  console.log('hello');
+  const user = {
+    username: "jorifgp",
+    id: 123
+  }
+
+  const token = generateToken(user);
+  res.json({ token });
+});

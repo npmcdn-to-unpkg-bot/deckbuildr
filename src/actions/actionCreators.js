@@ -2,17 +2,43 @@ import query from 'query-string';
 import { v4 } from 'node-uuid'
 import * as actionTypes from './actionTypes';
 
+
 export function fetchCards(filters = { q: '' }) {
   return function (dispatch) {
     const BASE = 'https://api.deckbrew.com/mtg/cards/typeahead?';
     const FILTERS = query.stringify(filters);
     const URI = `${BASE}${FILTERS}`;
 
+    dispatch(fetchRequest());
+
     fetch(URI)
       .then(cards => cards.json())
       .then(cards => dispatch(fetchCardsFulfilled(cards)))
       .catch(error => dispatch(fetchCardsRejected(error)));
   };
+}
+
+export const fetchCardsById = (cards) => {
+  return dispatch => {
+    const BASE = 'https://api.deckbrew.com/mtg/cards/';
+    const promises = cards.map(cardId => fetch(BASE + cardId).then(data => data.json()));
+
+    dispatch(fetchRequest());
+
+    Promise.all(promises)
+      .then(cards => {
+        dispatch(fetchCardsFulfilled(cards))
+      })
+      .catch(err => {
+        dispatch(fetchCardsRejected(err))
+      });
+  }
+}
+
+export const fetchRequest = () => {
+  return {
+    type: actionTypes.FETCH_REQUEST
+  }
 }
 
 export const fetchCardsFulfilled = (cards) => {
@@ -31,17 +57,18 @@ export const fetchCardsRejected = (error) => {
 
 export const createDeck = ({title, description, category = null}) => {
   const id = v4();
-
-  return {
-    type: actionTypes.CREATE_DECK,
-    deck: {
+  const deck = {
       id,
       title,
       description,
       category,
       cards: [],
       favorited: false
-    }
+  };
+
+  return {
+    type: actionTypes.CREATE_DECK,
+    deck
   }
 }
 
@@ -66,19 +93,33 @@ export const setDeckActive = (id) => {
   }
 }
 
-export const addCardToDeck = (id, amount) => {
+export const addCardToDeck = (newCard, amount, deckId) => {
+  amount = Number.parseInt(amount);
   return {
     type: actionTypes.ADD_CARD_TO_DECK,
-    id,
-    amount
+    newCard,
+    amount,
+    deckId
   }
 }
 
-export const removeCardFromDeck = (id, amount) => {
+export const removeCardFromDeck = (cardId, amount, deckId) => {
   return {
     type: actionTypes.REMOVE_CARD_FROM_DECK,
-    id,
-    amount
+    cardId,
+    amount,
+    deckId
   }
 }
 
+export const createCategory = (name) => {
+  const id = v4();
+  const category = {
+    id,
+    name
+  }
+  return {
+    type: actionTypes.CREATE_CATEGORY,
+    category
+  }
+}

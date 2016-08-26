@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { addCardToDeck, deleteCardFromDeck } from '../../actions/actionCreators';
+import { addCardToDeck, removeCardFromDeck } from '../../actions/actionCreators';
 
 class AddCardForm extends React.Component {
-  constructor ({ cardId }) {
+  constructor () {
     super();
 
     this.onClickAddCard = this.onClickAddCard.bind(this);
@@ -13,15 +13,13 @@ class AddCardForm extends React.Component {
   onClickRemoveCard(e) {
     e.preventDefault();
     const amount = this.amount.value;
-
-    this.dispatch(removeCard(id, amount));
+    this.props.dispatch(removeCardFromDeck(this.props.card.id, amount, this.props.activeDeck));
   }
 
   onClickAddCard(e) {
     e.preventDefault();
     const amount = this.amount.value;
-
-    this.dispatch(addCard(id, amount));
+    this.props.dispatch(addCardToDeck(this.props.card, amount, this.props.activeDeck));
   }
 
   render() {
@@ -30,7 +28,7 @@ class AddCardForm extends React.Component {
         <form>
           <div className="input-group col-lg-6">
             <span className="input-group-btn">
-              <button type="submit" className="btn btn-danger" onClick={this.onClickAddCard}>-</button>
+              <button type="submit" className="btn btn-danger" onClick={this.onClickRemoveCard}>-</button>
             </span>
             <input
               type="number"
@@ -51,4 +49,4 @@ class AddCardForm extends React.Component {
   }
 }
 
-export default connect()(AddCardForm);
+export default connect(state => ({ activeDeck: state.activeDeck}))(AddCardForm);

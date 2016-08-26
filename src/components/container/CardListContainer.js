@@ -3,7 +3,7 @@ import CardList from '../presentational/CardList';
 
 const mapStateToProps = (state) => {
   return {
-    cards: state.searchedCards
+    cards: state.searchedCards.map(cardId => state.cardsById[cardId])
   }
 };
 

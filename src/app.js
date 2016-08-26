@@ -7,7 +7,8 @@ import routes from './routes.js';
 import reducers from './reducers';
 
 // Get the initial state of the app injected at server render.
-const initialState = window.INITIAL_STATE; //
+const localStorageCopy = localStorage.getItem('deckbuildrState') || '{}';
+const initialState = JSON.parse(localStorageCopy);
 const store = configureStore(initialState);
 
 /**
