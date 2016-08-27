@@ -13,6 +13,7 @@ const mapStateToProps = (state, ownProps) => {
           }
           return true;
       })
+      .sort(deck => !deck.favorited)
   }
 };
 
