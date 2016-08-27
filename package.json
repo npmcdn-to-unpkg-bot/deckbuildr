@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "deckbuildr",
   "scripts": {
+    "postinstall": "npm run build",
     "start": "npm run serve",
     "serve": "NODE_ENV=development babel-node ./src/server.js",
     "serve:prod": "NODE_ENV=development node ./dist/server.bundle.js",
