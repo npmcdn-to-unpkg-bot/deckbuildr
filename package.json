@@ -59,11 +59,11 @@
     "toastr": "^2.1.2",
     "webpack": "1.13.0",
     "webpack-dev-middleware": "1.6.1",
-    "webpack-hot-middleware": "2.10.0"
+    "webpack-hot-middleware": "2.10.0",
+    "whatwg-fetch": "^1.0.0"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/jdreg95/deckbuildr"
   }
 }
-
