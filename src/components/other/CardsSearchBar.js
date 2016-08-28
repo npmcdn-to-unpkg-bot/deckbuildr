@@ -2,13 +2,21 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { fetchCards } from '../../actions/actionCreators';
 
+/*
+  Describes a stateful search bar to search cards with.
+ */
 class CardsSearchBar extends React.Component {
   constructor () {
     super();
 
+    // Bind this to event handler functions.
     this.onClickFetchCards = this.onClickFetchCards.bind(this);
   }
 
+  /**
+   * Dispatches an action to fetch cards by a search query with.
+   * @param e
+   */
   onClickFetchCards (e) {
     e.preventDefault();
     const query = this.query.value;

@@ -1,8 +1,14 @@
 import query from 'query-string';
+// v4 is a function that generates a random ID.
 import { v4 } from 'node-uuid'
 import * as actionTypes from './actionTypes';
 
 
+/**
+ * Fetches cards based on a filter, then dispatches an action to let state know if the request was fulfilled or rejected.
+ * @param filters
+ * @returns {Function}
+ */
 export function fetchCards(filters = { q: '' }) {
   return function (dispatch) {
     const BASE = 'https://api.deckbrew.com/mtg/cards/typeahead?';
@@ -18,6 +24,11 @@ export function fetchCards(filters = { q: '' }) {
   };
 }
 
+/**
+ * Fetches an array of cards by their IDs, then dispatches an action to let state know if the request was fulfilled or rejected.
+ * @param cards
+ * @returns {function()}
+ */
 export const fetchCardsById = (cards) => {
   return dispatch => {
     const BASE = 'https://api.deckbrew.com/mtg/cards/';
@@ -35,12 +46,20 @@ export const fetchCardsById = (cards) => {
   }
 }
 
+/**
+ * Returns a fetch request action object
+ * @returns {{type}}
+ */
 export const fetchRequest = () => {
   return {
     type: actionTypes.FETCH_REQUEST
   }
 }
 
+/**
+ * Returns a fetch fulfilled action object
+ * @returns {{type}}
+ */
 export const fetchCardsFulfilled = (cards) => {
   return {
     type: actionTypes.FETCH_CARDS_FULFILLED,
@@ -48,6 +67,10 @@ export const fetchCardsFulfilled = (cards) => {
   }
 }
 
+/**
+ * Returns a fetch rejected action object
+ * @returns {{type}}
+ */
 export const fetchCardsRejected = (error) => {
   return {
     type: actionTypes.FETCH_CARDS_REJECTED,
@@ -55,6 +78,10 @@ export const fetchCardsRejected = (error) => {
   }
 }
 
+/**
+ * Returns a fetch fulfilled action object
+ * @returns {{type}}
+ */
 export const fetchCardsByIdFulfilled = (cards) => {
   return {
     type: actionTypes.FETCH_CARDS_BY_ID_FULFILLED,
@@ -62,6 +89,10 @@ export const fetchCardsByIdFulfilled = (cards) => {
   }
 }
 
+/**
+ * Returns a fetch rejected action object
+ * @returns {{type}}
+ */
 export const fetchCardsByIdRejected = (error) => {
   return {
     type: actionTypes.FETCH_CARDS_BY_ID_REJECTED,
@@ -69,6 +100,13 @@ export const fetchCardsByIdRejected = (error) => {
   }
 }
 
+/**
+ * Returns a create deck action object
+ * @param title
+ * @param description
+ * @param category
+ * @returns {{type, deck: {id: *, title: *, description: *, category: *, cards: Array, favorited: boolean}}}
+ */
 export const createDeck = ({title, description, category}) => {
   const id = v4();
   const deck = {
@@ -85,7 +123,11 @@ export const createDeck = ({title, description, category}) => {
     deck
   }
 }
-
+/**
+ * Returns a favorite deck action object
+ * @param id
+ * @returns {{type, id: *}}
+ */
 export const favoriteDeck = (id) => {
   return {
     type: actionTypes.TOGGLE_FAVORITE_DECK,
@@ -93,6 +135,11 @@ export const favoriteDeck = (id) => {
   }
 }
 
+/**
+ * Returns a delete deck action object
+ * @param id
+ * @returns {{type, id: *}}
+ */
 export const deleteDeck = (id) => {
   return {
     type: actionTypes.DELETE_DECK,
@@ -100,6 +147,11 @@ export const deleteDeck = (id) => {
   }
 }
 
+/**
+ * Returns a set deck active action object
+ * @param id
+ * @returns {{type, id: *}}
+ */
 export const setDeckActive = (id) => {
   return {
     type: actionTypes.SET_DECK_ACTIVE,
@@ -107,6 +159,13 @@ export const setDeckActive = (id) => {
   }
 }
 
+/**
+ * Returns an add card to deck action object
+ * @param newCard
+ * @param amount
+ * @param deckId
+ * @returns {{type, newCard: *, amount: (number|*), deckId: *}}
+ */
 export const addCardToDeck = (newCard, amount, deckId) => {
   amount = Number.parseInt(amount);
 
@@ -118,6 +177,14 @@ export const addCardToDeck = (newCard, amount, deckId) => {
   }
 }
 
+/**
+ * Returns an remove card from deck action object
+ * @param cardId
+ * @param edition
+ * @param amount
+ * @param deckId
+ * @returns {{type, cardId: *, edition: *, amount: *, deckId: *}}
+ */
 export const removeCardFromDeck = (cardId, edition, amount, deckId) => {
   return {
     type: actionTypes.REMOVE_CARD_FROM_DECK,

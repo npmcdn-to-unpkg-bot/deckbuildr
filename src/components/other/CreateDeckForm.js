@@ -3,13 +3,22 @@ import toastr from 'toastr';
 import { connect } from 'react-redux';
 import { createDeck, createCategory } from '../../actions/actionCreators';
 import { Link } from 'react-router';
-//TODO: Check why it doesnt reuse options
+
+/*
+  Describes a form to create decks with
+ */
 class CreateDeckForm extends React.Component {
   constructor () {
     super();
+
+    // Bind this to event handler functions
     this.onSubmitCreateDeck = this.onSubmitCreateDeck.bind(this);
   }
 
+  /**
+   * Dispatches an action to create a deck. Also shows a corresponding toast and redirects you afterwards.
+   * @param e
+   */
   onSubmitCreateDeck (e) {
     e.preventDefault();
     const { title, description, category } = this;
@@ -25,6 +34,7 @@ class CreateDeckForm extends React.Component {
   }
 
   render () {
+    // Map categories to option elements to dynamically show available categories
     const options = this.props.categories.map(category => <option key={category.name} value={category.name}>{category.name}</option>)
 
     return (

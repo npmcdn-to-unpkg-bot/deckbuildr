@@ -1,6 +1,12 @@
 import { connect } from 'react-redux';
 import DeckList from '../presentational/DeckList';
 
+/**
+ * Maps decks and categories to a list of decks component.
+ * @param state
+ * @param ownProps
+ * @returns {{decks: (Query|Array.<T>|*|Aggregate), categories: Array}}
+ */
 const mapStateToProps = (state, ownProps) => {
   const { filter } = ownProps.location.query;
 

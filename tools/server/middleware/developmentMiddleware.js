@@ -3,6 +3,10 @@ import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 
+/**
+ * Function that adds development middleware
+ * @param config
+ */
 export default function addDevMiddleware(config) {
   const app = express();
 
@@ -14,7 +18,8 @@ export default function addDevMiddleware(config) {
       colors: true
     }
   });
-
+  
+  // Sets up webpack for development serving and hot reloading.
   app.use(middleware);
   app.use(webpackHotMiddleware(compiler));
 

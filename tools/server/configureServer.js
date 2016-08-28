@@ -5,6 +5,9 @@ import productionMiddleware from './middleware/productionMiddleware.js';
 
 const IS_DEV = process.env.NODE_ENV !== 'production';
 
+/**
+ * Function that defines server middleware depending on the environment.
+ */
 export default function configureServer() {
   const app = express();
 

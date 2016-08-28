@@ -1,8 +1,14 @@
 import { connect } from 'react-redux';
 import CardList from '../presentational/CardList';
 
+/**
+ * Maps cards, the active deck and the isFetching state to props for the Cardlists component
+ * @param state
+ * @returns {{cards: *, activeDeck: *, isFetching: *}}
+ */
 const mapStateToProps = (state) => {
   return {
+    // Maps every card to it's corresponding editions.
     cards: state.searchedCards
       .map(cardId => {
         const card = state.cardsById[cardId];
@@ -23,5 +29,7 @@ const mapStateToProps = (state) => {
     isFetching: state.isFetching
   }
 };
+
+//  DO A QUICK CHECK HERE
 
 export default connect(mapStateToProps)(CardList);
