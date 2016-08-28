@@ -43,6 +43,7 @@
     "react": "15.0.2",
     "react-dom": "15.0.2",
     "react-hot-loader": "^1.3.0",
+    "react-lazy-load": "^3.0.10",
     "react-loader": "^2.4.0",
     "react-redux": "4.4.5",
     "react-router": "2.4.0",
@@ -63,8 +64,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/jdreg95/deckbuildr"
-  },
-  "devDependencies": {
-    "react-lazy-load": "^3.0.10"
   }
 }
+
