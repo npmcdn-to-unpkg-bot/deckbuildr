@@ -11,11 +11,17 @@ const PORT = process.env.PORT || 3005;
 const app = express();
 const JWT_SECRET = "Jori";
 
+// Configures the server middleware
 app.use(configureServer());
 
+// Sets the view engine (pug is jade, they changed the name)
 app.set('view engine', 'pug');
 app.set('views', `${__dirname}/views`);
 
+/*
+ For every available route (*), the routes in the routes.js file are matched with the visited route.
+ This returns everything needed about that route and it's component, so you can render it on the server.
+ */
 app.get('*', (req, res) => {
   match({ routes, location: req.url }, (err, redirect, props) => {
     if (err) {
@@ -23,10 +29,12 @@ app.get('*', (req, res) => {
     } else if (!props) {
       res.status(404).render('404');
     } else {
+      // Object with initial state, API calls could be added here to make this dynamic.
       const initialState = {
         ...categoriesInitialState
       }
 
+      // Sync initialState with store
       const store = configureStore(initialState);
       const react = (
         <Provider store={store}>
@@ -34,15 +42,17 @@ app.get('*', (req, res) => {
         </Provider>
       );
 
+      // Render React as a renderable HTML string
       const reactString = renderToString(react);
       const finalState = store.getState();
 
-      console.log(finalState);
+      // Render the React in the pug template using the initialState added onto the initial store state.
       res.render('index', { reactString, finalState });
     }
   });
 });
 
+// Start the server, listening to a certain PORT
 app.listen(PORT, error => {
   if (error) {
     console.log(error);  // eslint-disable-line no-console
@@ -51,6 +61,10 @@ app.listen(PORT, error => {
   }
 });
 
+/*
+ A mock and static initialState for categories, used this to add categories (model) to my state initially.
+ This is also used to show server side rendering works, also when you need data from the server in the server side render.
+*/
 const categoriesInitialState = {
   categoryIds: [
     'standard',

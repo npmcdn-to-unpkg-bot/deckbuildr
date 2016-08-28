@@ -1,6 +1,12 @@
 import * as actionTypes from '../actions/actionTypes';
 
-export default function activeDeck (state = null, action) {
+/**
+ * Reducer that sets an active deck to be edited, but also deletes this reference when the deck is deleted.
+ * @param state
+ * @param action
+ * @returns {*}
+ */
+function activeDeck (state = null, action) {
   switch (action.type) {
     case actionTypes.SET_DECK_ACTIVE: {
       state = action.id;
@@ -17,3 +23,5 @@ export default function activeDeck (state = null, action) {
     }
   }
 }
+
+export default activeDeck;

@@ -1,6 +1,15 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
+/**
+ * Renders a stateless DeckSummary element.
+ * @param id
+ * @param title
+ * @param description
+ * @param favorited
+ * @returns {XML}
+ * @constructor
+ */
 const DeckSummary = ({ id, title, description, favorited}) => {
   return (
     <section>

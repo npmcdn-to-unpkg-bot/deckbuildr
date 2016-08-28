@@ -6,6 +6,9 @@ import DeckListContainer from './components/container/DeckListContainer';
 import CreateDeckForm from './components/other/CreateDeckForm';
 import DeckDetailContainer from './components/container/DeckDetailContainer';
 
+/*
+  A route object with every available route in the system and their corresponding 'main' component
+ */
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={Home} />

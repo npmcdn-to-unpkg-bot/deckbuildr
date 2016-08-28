@@ -2,6 +2,16 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import LazyLoader from 'react-lazy-load';
 
+/**
+ * Returns a stateless Card component.
+ * Images are lazily loaded using the module 'react-lazy-load'.
+ * @param image_url
+ * @param name
+ * @param set
+ * @param store_url
+ * @returns {JSX}
+ * @constructor
+ */
 const Card = ({image_url, name, set, store_url}) => {
   return (
         <section>
