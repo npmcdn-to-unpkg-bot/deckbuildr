@@ -31,7 +31,6 @@ export default function decksById (state = {}, action) {
 
       if (foundCard) {
         if (foundCard.amount - amount <= 0) {
-          console.log('delete altogether');
           return Object.assign({}, state, {
             [deckId]: Object.assign({}, {
               ...state[deckId],
