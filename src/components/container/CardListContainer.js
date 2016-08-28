@@ -11,6 +11,7 @@ const mapStateToProps = (state) => {
           newCard.image_url = edition.image_url;
           newCard.set = edition.set;
           newCard.store_url = edition.store_url;
+          newCard.edition = index;
           return newCard;
         })
       })

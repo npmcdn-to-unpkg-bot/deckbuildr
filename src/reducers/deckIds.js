@@ -6,7 +6,7 @@ export default function deckIds (state = [], action) {
       return [...state, action.deck.id];
     }
     case actionTypes.DELETE_DECK: {
-      return state.filter(deck => deck.id === action.id);
+      return state.filter(deck => deck !== action.id);
     }
     default: {
       return state;

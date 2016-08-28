@@ -7,7 +7,6 @@ import configureStore from './store/configureStore';
 import routes from './routes';
 import configureServer from '../tools/server/configureServer.js';
 import jwt from 'jsonwebtoken';
-
 const PORT = process.env.PORT || 3005;
 const app = express();
 const JWT_SECRET = "Jori";
@@ -24,8 +23,9 @@ app.get('*', (req, res) => {
     } else if (!props) {
       res.status(404).render('404');
     } else {
-      // Set initialState here if needed.
-      const initialState = {};
+      const initialState = {
+        ...categoriesInitialState
+      }
 
       const store = configureStore(initialState);
       const react = (
@@ -37,6 +37,7 @@ app.get('*', (req, res) => {
       const reactString = renderToString(react);
       const finalState = store.getState();
 
+      console.log(finalState);
       res.render('index', { reactString, finalState });
     }
   });
@@ -50,46 +51,39 @@ app.listen(PORT, error => {
   }
 });
 
-function generateToken(user) {
-  const u = {
-   username: user.username,
-   id: user.id.toString(),
-  };
-
-  return jwt.sign(u, JWT_SECRET, {
-     expiresIn: 60 * 60 * 24
-  });
-}
-
-// app.post('/signup', (req, res, next) => {
-//  const body = req.body;
-//  const hash = bcrypt.hashSync(body.password.trim(), 10);
-//  const user = new User({
-//   username: body.username.trim(),
-//   password: hash,
-//  });
-
-//  user.save((err, user) => {
-//     if (err) {
-//       throw err
-//     }
-
-//     const token = utils.generateToken(user);
-
-//     res.json({
-//        user,
-//        token
-//     });
-//  });
-// });
-
-app.post('/login', (req, res) => {
-  console.log('hello');
-  const user = {
-    username: "jorifgp",
-    id: 123
+const categoriesInitialState = {
+  categoryIds: [
+    'standard',
+    'legacy',
+    'commander',
+    'modern',
+    'pauper',
+    'casual'
+  ],
+  categoriesById: {
+    ['standard']: {
+      id: 'standard',
+      name: 'standard'
+    },
+    ['legacy']: {
+      id: 'legacy',
+      name: 'legacy'
+    },
+    ['commander']: {
+      id: 'commander',
+      name: 'commander'
+    },
+    ['modern']: {
+      id: 'modern',
+      name: 'modern'
+    },
+    ['pauper']: {
+      id: 'pauper',
+      name: 'pauper'
+    },
+    ['casual']: {
+      id: 'casual',
+      name: 'casual'
+    }
   }
-
-  const token = generateToken(user);
-  res.json({ token });
-});
+}

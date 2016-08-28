@@ -12,11 +12,11 @@ const CardsList = ({cards, activeDeck, isFetching}) => {
       {activeDeck &&
         <AddCardForm
           card={card}
+          activeDeck={activeDeck}
         />
       }
     </section>
   ));
-  console.log(cardElements.length === 0)
   return (
     <Loader loaded={!isFetching} color="#66ccff">
       <section className="row">

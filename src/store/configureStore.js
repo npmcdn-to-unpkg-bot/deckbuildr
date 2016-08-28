@@ -13,7 +13,7 @@ export default function configureStore(initialState) {
     initialState,
     compose(
       applyMiddleware(...middleware),
-      persistState(['decksById', 'deckIds'], { key: 'deckbuildrState'}),
+      typeof window === 'object' ? persistState(['decksById', 'deckIds', 'activeDeck', 'categoryIds', 'categoriesById'], { key: 'deckbuildrState'}) : f => f,
       typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
     )
   );

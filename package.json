@@ -32,6 +32,7 @@
     "eslint-plugin-react": "^5.1.1",
     "express": "4.13.4",
     "extract-text-webpack-plugin": "^1.0.1",
+    "jquery": "^3.1.0",
     "jsonwebtoken": "^7.1.9",
     "mongoose": "^4.5.9",
     "node-fetch": "^1.5.3",
@@ -54,6 +55,7 @@
     "rimraf": "^2.5.2",
     "sass-loader": "^3.2.0",
     "style-loader": "^0.13.1",
+    "toastr": "^2.1.2",
     "webpack": "1.13.0",
     "webpack-dev-middleware": "1.6.1",
     "webpack-hot-middleware": "2.10.0"

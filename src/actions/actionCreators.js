@@ -27,10 +27,10 @@ export const fetchCardsById = (cards) => {
 
     Promise.all(promises)
       .then(cards => {
-        dispatch(fetchCardsFulfilled(cards))
+        dispatch(fetchCardsByIdFulfilled(cards))
       })
       .catch(err => {
-        dispatch(fetchCardsRejected(err))
+        dispatch(fetchCardsByIdRejected(err))
       });
   }
 }
@@ -55,7 +55,21 @@ export const fetchCardsRejected = (error) => {
   }
 }
 
-export const createDeck = ({title, description, category = null}) => {
+export const fetchCardsByIdFulfilled = (cards) => {
+  return {
+    type: actionTypes.FETCH_CARDS_BY_ID_FULFILLED,
+    cards
+  }
+}
+
+export const fetchCardsByIdRejected = (error) => {
+  return {
+    type: actionTypes.FETCH_CARDS_BY_ID_REJECTED,
+    error
+  }
+}
+
+export const createDeck = ({title, description, category}) => {
   const id = v4();
   const deck = {
       id,
@@ -95,6 +109,7 @@ export const setDeckActive = (id) => {
 
 export const addCardToDeck = (newCard, amount, deckId) => {
   amount = Number.parseInt(amount);
+
   return {
     type: actionTypes.ADD_CARD_TO_DECK,
     newCard,
@@ -103,23 +118,12 @@ export const addCardToDeck = (newCard, amount, deckId) => {
   }
 }
 
-export const removeCardFromDeck = (cardId, amount, deckId) => {
+export const removeCardFromDeck = (cardId, edition, amount, deckId) => {
   return {
     type: actionTypes.REMOVE_CARD_FROM_DECK,
     cardId,
+    edition,
     amount,
     deckId
-  }
-}
-
-export const createCategory = (name) => {
-  const id = v4();
-  const category = {
-    id,
-    name
-  }
-  return {
-    type: actionTypes.CREATE_CATEGORY,
-    category
   }
 }

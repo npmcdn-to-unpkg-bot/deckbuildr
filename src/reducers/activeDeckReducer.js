@@ -6,6 +6,12 @@ export default function activeDeck (state = null, action) {
       state = action.id;
       return state;
     }
+    case actionTypes.DELETE_DECK: {
+      if (action.id == state) {
+        state = null;
+      }
+      return state;
+    }
     default: {
       return state;
     }

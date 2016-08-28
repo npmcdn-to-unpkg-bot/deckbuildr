@@ -13,7 +13,9 @@ const mapStateToProps = (state, ownProps) => {
           }
           return true;
       })
-      .sort(deck => !deck.favorited)
+      .sort(deck => !deck.favorited),
+    categories: state.categoryIds
+      .map(categoryId => state.categoriesById[categoryId])
   }
 };
 

@@ -8,7 +8,6 @@ export default function decksById (state = {}, action) {
         ...state,
         [deck.id]: {
           ...deck,
-          category: 'casual'
         }
       };
     }
@@ -27,36 +26,33 @@ export default function decksById (state = {}, action) {
       };
     }
     case actionTypes.REMOVE_CARD_FROM_DECK: {
-      const { cardId, deckId, amount } = action;
-      const foundCard = state[deckId].cards.find(card => cardId === card.id);
+      const { cardId, edition, deckId, amount } = action;
+      const foundCard = state[deckId].cards.find(card => cardId === card.id && card.edition === edition);
 
       if (foundCard) {
         if (foundCard.amount - amount <= 0) {
-          return {
-            ...state,
-            [deckId]: {
+          console.log('delete altogether');
+          return Object.assign({}, state, {
+            [deckId]: Object.assign({}, {
               ...state[deckId],
-              cards: state[deckId].cards
-                .filter(cardObject => cardObject.id !== cardId)
-            }
-          }
+              cards: state[deckId].cards.filter(card => !(card.id === foundCard.id && card.edition === foundCard.edition))
+            })
+          });
         } else {
-          return {
-            ...state,
-            [deckId]: {
-              ...state[deckId],
+          const index = state[deckId].cards.findIndex(card => cardId === card.id && card.edition === edition);
+          return Object.assign({}, state, {
+            [deckId]: Object.assign({}, state[deckId], {
               cards: [
-                ...state[deckId].cards
-                .filter(cardObject => cardObject.id !== cardId),
+               ...state[deckId].cards.slice(0, index),
+               ...state[deckId].cards.slice(index + 1),
                 {
-                  id: cardId,
+                  ...foundCard,
                   amount: foundCard.amount - amount
                 }
               ]
-            }
-          }
+            })
+          })
         }
-
       } else {
         return state;
       }
@@ -64,29 +60,33 @@ export default function decksById (state = {}, action) {
     }
     case actionTypes.ADD_CARD_TO_DECK: {
       const { newCard, deckId, amount } = action;
-      const newState = { ...state };
-      const foundCard = newState[deckId].cards.find(card => newCard.id === card.id);
+      const foundCard = state[deckId].cards.find(card => newCard.id === card.id && card.edition === newCard.edition);
+      const newState = { ...state}
 
       if (foundCard) {
-        newState[deckId] = {
-          ...newState[deckId],
-          cards: [
-            ...newState[deckId].cards.filter(card => card.id !== foundCard.id),
-            {
-              id: foundCard.id,
-              amount: foundCard.amount + amount
-            }
-          ]
-        }
+        const index = newState[deckId].cards.findIndex(card => newCard.id === card.id && card.edition === newCard.edition);
+        return Object.assign({}, state, {
+          [deckId]: {
+            ...state[deckId],
+            cards: [
+               ...state[deckId].cards.slice(0, index),
+               ...state[deckId].cards.slice(index + 1),
+              {
+                ...foundCard,
+                amount: foundCard.amount + amount
+              }
+            ]
+          }
+        });
       }
       else {
-        console.log(newCard.id);
         newState[deckId] = {
           ...newState[deckId],
           cards: [
             ...newState[deckId].cards,
             {
               id: newCard.id,
+              edition: newCard.edition,
               amount
             }
           ]

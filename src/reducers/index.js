@@ -19,6 +19,6 @@ export default combineReducers({
   decksById,
   deckIds,
   isFetching,
-  // categoriesById,
-  // categoryIds
+  categoriesById,
+  categoryIds
 });

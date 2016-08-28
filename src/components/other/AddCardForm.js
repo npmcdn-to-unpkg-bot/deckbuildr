@@ -13,7 +13,7 @@ class AddCardForm extends React.Component {
   onClickRemoveCard(e) {
     e.preventDefault();
     const amount = this.amount.value;
-    this.props.dispatch(removeCardFromDeck(this.props.card.id, amount, this.props.activeDeck));
+    this.props.dispatch(removeCardFromDeck(this.props.card.id, this.props.card.edition, amount, this.props.activeDeck));
   }
 
   onClickAddCard(e) {
@@ -49,4 +49,4 @@ class AddCardForm extends React.Component {
   }
 }
 
-export default connect(state => ({ activeDeck: state.activeDeck}))(AddCardForm);
+export default connect()(AddCardForm);
