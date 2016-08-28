@@ -1,6 +1,7 @@
-#Magic the Gathering deckbuilder
+# Magic the Gathering deckbuilder
 
-deckbuildr is een
+deckbuildr is een manier om lokaal gemakkelijk jouw Magic The Gathering decks bij te houden mee te bouwen.
+Je kan kaarten zoeken, decks maken en kaarten toevoegen aan of verwijderen van jouw decks. Met simpele drukken op de knop
 
 ## Technieken
 
@@ -21,6 +22,7 @@ deckbuildr is een
   - React hot reload (react-hot-loader)
   - ES2015 & ES2016 (deels)
   - Functional programming (immutable state & pure functions)
+  - Een aantal ongelofelijk handige, gave react modules/components
 
 ## Features
  - Server-side rendered, volledige functionaliteit zit erin, alleen gedemonstreerd via static data voor initial state.
@@ -34,3 +36,5 @@ deckbuildr is een
  - Decks verwijderen
  - Lazy loading van kaarten als ze niet binnen viewport zijn
  - Loader tijdens async operaties
+ - En nog meer ;) See for yourself.
+
